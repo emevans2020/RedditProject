@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="styles/stylesheet.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+	<script src="/scripts/auth.js"></script>
+	<script src="/scripts/index.js"></script>
+	<title>Reddit </title>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+	<!-- Initialize Firebase -->
+	<script>
+		var firebaseConfig = {
+			apiKey: "AIzaSyDUzNRAHGQsPRRFkPL3P0rdpplGuPbRA5M",
+			authDomain: "diyreddit-7f814.firebaseapp.com",
+			databaseURL: "https://diyreddit-7f814.firebaseio.com",
+			projectId: "diyreddit-7f814",
+			storageBucket: "diyreddit-7f814.appspot.com",
+			messagingSenderId: "401162339207",
+			appId: "1:401162339207:web:a785264f490353e9b34922",
+			measurementId: "G-ESK47Z7DWY"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		firebase.analytics();
+
+		const auth = firebase.auth();
+		const db = firebase.firestore();
+		const firestore = firebase.firestore();
+		const settings = {/* your settings... */ timestampsInSnapshots: true };
+		firestore.settings(settings);
+		const functions = firebase.functions();
+	</script>
+</head>
+
+<body>
+	<nav>
+		<div id="page1">
+			<ul>
+				<li class="logged-in hidden">
+					<a href="#" data-target="modal-account">Account</a>
+				</li>
+				<li class="logged-in hidden">
+					<a href="#" id="logout" onclick="logout()">Logout</a>
+				</li>
+				<li class="logged-out">
+					<a href="#" data-target="modal-create" onclick="login()">Login</a>
+				</li>
+		</div>
+	</nav>
+
+	<!--Display account info-->
+	<div id="account">
+		
+	</div>
+
+	<!-- CREATE POST MODAL -->
+	<div id="modal-create" class="modal logged-in hidden">
+		<div class="modal-content">
+			<h4>Create Post</h4><br>
+			<form id="create-form">
+				<div class="input-field">
+					<input type="text" id="title" required>
+					<label for="title">Post Title</label>
+				</div>
+				<div class="input-field">
+					<textarea id="content" class="materialize-textarea" required></textarea>
+					<label for="content">Post Content</label>
+				</div>
+				<button class="btn yellow darken-2 z-depth-0" onclick="createPost()">Create</button>
+			</form>
+	</div>
+
+
+	<!-- POST FEED -->
+	<div class="container" id="posts" style="margin-top: 40px;">
+		<ul class="collapsible z-depth-0 guides" style="border: none;">
+		</ul>
+	</div>
+</body>
+
+</html>
